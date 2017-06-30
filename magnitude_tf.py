@@ -38,14 +38,14 @@ def _diff(m):
 def _magnitude(D, t):
 	''' Computes the magnitude |tX|, as described in [1], given the distance matrix D and parameter t
 
-		[1] -  '''
+		[1] - "The magnitude of metric spaces", Tom Leinster, eprint arXiv:1012.5857 (2010) '''
 	b = tf.ones([tf.shape(D)[0]])
 	return tf.reduce_sum(tf.matrix_inverse(tf.exp(-t*D)))
 
 def _spread(D, t, q):
 	''' Computes the q-spread E_q(X, t) as described in [1] given the distance matrix D and parameters t and q 
 
-		[1] - "Spread: a measure of the size of metric spaces", Simon Willerton'''
+		[1] - "Spread: a measure of the size of metric spaces", Simon Willerton, eprint arXiv:1209.2300 (2012) '''
 	N = tf.cast(tf.shape(D)[0], tf.float32)
 	if q==1:
 		return tf.reduce_prod(tf.pow(tf.reduce_sum(tf.exp(-t*D), axis=1), 1/N))*N
